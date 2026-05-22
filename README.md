@@ -52,4 +52,4 @@ Projeto construído com auxílio do Claude (Anthropic) como par de programação
 
 ## Autora
 
-Alice — em transição de KonSeller para a área de desenvolvimento na Konsi.
+Alice Oliveira
