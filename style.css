@@ -1,0 +1,497 @@
+/* ============================================================
+   VARIÁVEIS DE COR — paleta dark fintech premium
+============================================================ */
+:root {
+  --bg-1: #07091a;
+  --bg-2: #0f1228;
+  --card: #161a38;
+  --card-h: #1f2447;
+  --border: #262b51;
+  --border-strong: #3a4279;
+  --text: #f4f6ff;
+  --text-dim: #8a92b8;
+  --verde: #22c993;
+  --amarelo: #f5b544;
+  --cinza: #2d3258;
+  --accent-1: #818cf8;
+  --accent-2: #38bdf8;
+  --accent-3: #c084fc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -10%, #2a2a6e 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 100% 100%, #1e2a5e 0%, transparent 50%),
+    var(--bg-1);
+  color: var(--text);
+  font-family: 'Manrope', -apple-system, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container central */
+.app {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 12px 0 24px;
+}
+
+/* ============================================================
+   CABEÇALHO
+============================================================ */
+.header {
+  text-align: center;
+  padding: 8px 0 4px;
+}
+
+.logo {
+  font-family: 'Sora', sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 8px;
+  background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 60%, var(--accent-3) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Brilho sutil atrás do texto */
+  filter: drop-shadow(0 0 24px rgba(129, 140, 248, 0.35));
+}
+
+.subtitulo {
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   GRADE DE TENTATIVAS
+============================================================ */
+.grade {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: center;
+}
+
+.linha {
+  display: flex;
+  gap: 7px;
+}
+
+.tile {
+  width: 60px;
+  height: 60px;
+  background: var(--bg-2);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.tile.preenchido {
+  border-color: var(--border-strong);
+  animation: pop 0.12s ease;
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Cores das tiles após enviar a tentativa */
+.tile.verde,
+.tile.amarelo,
+.tile.cinza {
+  color: white;
+  animation: flip 0.55s ease;
+}
+
+.tile.verde   { background: var(--verde);   border-color: var(--verde); }
+.tile.amarelo { background: var(--amarelo); border-color: var(--amarelo); }
+.tile.cinza   { background: var(--cinza);   border-color: var(--cinza); }
+
+@keyframes flip {
+  0%   { transform: rotateX(0); }
+  50%  { transform: rotateX(90deg); }
+  100% { transform: rotateX(0); }
+}
+
+/* Animação de "chacoalhar" quando palavra incompleta */
+.linha.shake {
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+
+/* ============================================================
+   MENSAGEM (validações e fim de jogo)
+============================================================ */
+.mensagem {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  min-height: 28px;
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.mensagem.vitoria,
+.mensagem.derrota {
+  padding: 8px 0 16px;
+}
+
+.mensagem.vitoria { color: var(--verde); }
+.mensagem.derrota { color: var(--amarelo); }
+
+/* ============================================================
+   TECLADO VIRTUAL
+============================================================ */
+.teclado {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.fileira {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.tecla {
+  min-width: 36px;
+  height: 56px;
+  padding: 0 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.tecla:hover {
+  background: var(--card-h);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.tecla:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.35);
+}
+
+.tecla-larga {
+  min-width: 68px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+/* Cores das teclas após uso */
+.tecla.verde   { background: var(--verde);   border-color: var(--verde);   color: white; }
+.tecla.amarelo { background: var(--amarelo); border-color: var(--amarelo); color: white; }
+.tecla.cinza   { background: var(--cinza);   border-color: var(--cinza);   color: var(--text-dim); cursor: not-allowed; opacity: 0.55; }
+.tecla.cinza:hover { transform: none; background: var(--cinza); border-color: var(--cinza); }
+
+/* ============================================================
+   RESULTADO FINAL + CARD DE DESAFIO
+============================================================ */
+.resultado-final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.texto-vitoria {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--verde);
+}
+
+.palavra-revelada {
+  color: var(--text-dim);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 18px;
+  background: rgba(245, 181, 68, 0.10);
+  border: 1px solid rgba(245, 181, 68, 0.25);
+  border-radius: 10px;
+}
+
+.palavra-revelada strong {
+  color: var(--amarelo);
+  letter-spacing: 4px;
+  font-weight: 800;
+  margin-left: 6px;
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+}
+
+.card-desafio {
+  width: 100%;
+  max-width: 380px;
+  padding: 22px 24px;
+  background: linear-gradient(135deg,
+    rgba(129, 140, 248, 0.16),
+    rgba(56, 189, 248, 0.10),
+    rgba(192, 132, 252, 0.14));
+  border: 1px solid rgba(129, 140, 248, 0.32);
+  border-radius: 16px;
+  text-align: center;
+  animation: aparecerDesafio 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:
+    0 8px 32px rgba(99, 102, 241, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes aparecerDesafio {
+  from { opacity: 0; transform: translateY(14px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.card-desafio-titulo {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.card-desafio-texto {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* Botão "jogar de novo" */
+.botao-novo {
+  margin-top: 4px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 6px 20px rgba(129, 140, 248, 0.38);
+}
+
+.botao-novo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(129, 140, 248, 0.55);
+}
+
+.botao-novo:active {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   CARD DE DICA (aparece após 4 tentativas erradas)
+============================================================ */
+.card-dica {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  background: linear-gradient(135deg,
+    rgba(245, 181, 68, 0.14),
+    rgba(245, 181, 68, 0.05));
+  border: 1px solid rgba(245, 181, 68, 0.32);
+  border-radius: 14px;
+  text-align: center;
+  animation: aparecerDesafio 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(245, 181, 68, 0.12);
+}
+
+.card-dica-titulo {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.card-dica-texto {
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.card-dica-texto strong {
+  font-family: 'Sora', sans-serif;
+  color: var(--amarelo);
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 17px;
+}
+
+/* ============================================================
+   MODAL DE FIM DE JOGO (vitória/derrota)
+============================================================ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 9, 26, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  background: linear-gradient(160deg, var(--card) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: 24px;
+  padding: 36px 28px 28px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: scaleIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-icone {
+  font-size: 52px;
+  line-height: 1;
+}
+
+.modal-titulo {
+  font-family: 'Sora', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.modal-titulo.vitoria { color: var(--verde); }
+.modal-titulo.derrota { color: var(--amarelo); }
+
+.modal-subtitulo {
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: -6px;
+}
+
+.modal-palavra {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-family: 'Sora', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 8px;
+  color: var(--text);
+  margin: 4px 0;
+}
+
+/* ============================================================
+   RESPONSIVO MOBILE
+============================================================ */
+@media (max-width: 420px) {
+  .app { gap: 22px; }
+  .logo { font-size: 30px; letter-spacing: 5px; }
+  .subtitulo { font-size: 10px; letter-spacing: 2.5px; }
+  .tile { width: 52px; height: 52px; font-size: 24px; border-radius: 10px; }
+  .grade, .linha { gap: 6px; }
+  .tecla { min-width: 30px; height: 50px; padding: 0 8px; font-size: 14px; }
+  .tecla-larga { min-width: 56px; font-size: 10px; }
+  .fileira { gap: 5px; }
+  .card-desafio { padding: 18px 20px; }
+  .card-desafio-texto { font-size: 15px; }
+  .modal { padding: 28px 22px 22px; gap: 14px; }
+  .modal-icone { font-size: 44px; }
+  .modal-titulo { font-size: 22px; }
+  .modal-palavra { font-size: 20px; letter-spacing: 6px; padding: 12px 20px; }
+}
+
+@media (max-width: 340px) {
+  .tile { width: 46px; height: 46px; font-size: 20px; }
+  .tecla { min-width: 26px; height: 46px; padding: 0 5px; font-size: 13px; }
+  .tecla-larga { min-width: 48px; font-size: 9px; letter-spacing: 1px; }
+}
